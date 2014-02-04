@@ -1,4 +1,4 @@
-# combine-css v0.0.2 [![Build Status](https://travis-ci.org/adam-lynch/gulp-combine-css.png)](https://travis-ci.org/adam-lynch/gulp-combine-css)
+# combine-css v0.0.2 [![Build Status](https://travis-ci.org/adam-lynch/combine-css.png)](https://travis-ci.org/adam-lynch/combine-css)
 
 ## Information
 
