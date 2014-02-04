@@ -4,7 +4,7 @@
 
 <table>
 <tr> 
-<td>Package</td><td>gulp-combine-css</td>
+<td>Package</td><td>combine-css</td>
 </tr>
 <tr>
 <td>Description</td>
