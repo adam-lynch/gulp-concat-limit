@@ -1,6 +1,6 @@
 {
     "name": "combine-css",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "homepage": "http://github.com/adam-lynch/combine-css",
     "description": "Combines CSS files into as few files as possible, taking size and selector limits into account",
     "main": "./index.js",

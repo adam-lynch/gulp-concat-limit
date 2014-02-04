@@ -1,4 +1,4 @@
-# combine-css
+# combine-css v0.0.2 [![Build Status](https://travis-ci.org/adam-lynch/gulp-combine-css.png)](https://travis-ci.org/adam-lynch/gulp-combine-css)
 
 ## Information
 
@@ -18,7 +18,7 @@
 
 ## Example usage with [Gulp](http://github.com/gulpjs/gulp)
 
-```js 
+```js
 var gulp = require('gulp');
 var combineCSS = require('combine-css');
 
