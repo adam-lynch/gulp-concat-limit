@@ -18,7 +18,7 @@
 
 ## Example usage with [Gulp](http://github.com/gulpjs/gulp)
 
-```js
+```js 
 var gulp = require('gulp');
 var combineCSS = require('combine-css');
 
