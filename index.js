@@ -6,7 +6,7 @@ var path = require('path');
 var File = require('vinyl');
 
 module.exports = function(options){
-    var pluginName = 'gulp-combine-css';
+    var pluginName = 'combine-css';
 
     options = options || {};
 
