@@ -1,0 +1,32 @@
+{
+    "name": "gulp-combine-css",
+    "version": "0.0.1",
+    "homepage": "http://github.com/adam-lynch/gulp-combine-css",
+    "description": "Combines CSS files into as few files as possible, taking size and selector limits into account",
+    "main": "index.js",
+    "dependencies": {
+        "gonzales": "*",
+        "through": "~2.3.4"
+    },
+    "devDependencies": {
+        "gulp-util": "~2.2.5"
+    },
+    "scripts": {},
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/adam-lynch/gulp-combine-css.git"
+    },
+    "keywords": [
+        "gulpplugin",
+        "css",
+        "combine"
+    ],
+    "author": "Adam Lynch <adam@teamwork.com>",
+    "license": "MIT",
+    "bugs": {
+        "url": "http://github.com/adam-lynch/gulp-combine-css/issues"
+    },
+    "engines": {
+        "node": ">=0.8"
+    }
+}
