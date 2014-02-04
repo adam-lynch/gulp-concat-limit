@@ -1,4 +1,4 @@
-# gulp-combine-css
+# combine-css
 
 ## Information
 
@@ -20,7 +20,7 @@
 
 ```js
 var gulp = require('gulp');
-var combineCSS = require('gulp-combine-css');
+var combineCSS = require('combine-css');
 
 gulp.task('combine', function() {
     gulp.src('./css/*.css')
