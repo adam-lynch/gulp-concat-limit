@@ -1,4 +1,3 @@
-var console = require('console');
 var through = require('through');
 var gonzales = require('gonzales');
 var os = require('os');
