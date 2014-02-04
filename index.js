@@ -3,9 +3,7 @@ var through = require('through');
 var gonzales = require('gonzales');
 var os = require('os');
 var path = require('path');
-var gutil = require('gulp-util');
-var PluginError = gutil.PluginError;
-var File = gutil.File;
+var File = require('vinyl');
 
 module.exports = function(options){
     var pluginName = 'gulp-combine-css';
@@ -31,7 +29,7 @@ module.exports = function(options){
 
     function bufferContents(file){
         if (file.isNull()) return; // ignore
-        if (file.isStream()) return this.emit('error', new PluginError(pluginName,  'Streaming not supported'));
+        if (file.isStream()) return this.emit('error', new Error(pluginName,  'Streaming not supported'));
 
         if (!firstFile) firstFile = file;
 

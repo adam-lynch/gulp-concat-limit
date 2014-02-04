@@ -1,0 +1,6 @@
+body {
+    background: red;
+    border: 1px solid yellow;
+}
+
+.sub, p, #a + li:hover { display: inline-block /*sdfsf sdffs=sdfsfds*/}

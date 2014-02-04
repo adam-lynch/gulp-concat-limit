@@ -1,0 +1,15 @@
+/* ----------------
+ * @asdas: asdasdas
+ ****/
+
+@-moz-document url-prefix() {
+    h1 {
+        color: red;
+    }
+}
+
+@media screen{
+    #as > li.css:hover, .asdasda + .a::after {
+        -webkit-appearance: none;
+    }
+}
