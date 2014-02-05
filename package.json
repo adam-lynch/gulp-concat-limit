@@ -1,13 +1,12 @@
 {
-    "name": "combine-css",
-    "version": "0.0.2",
-    "homepage": "http://github.com/adam-lynch/combine-css",
-    "description": "Combines CSS files into as few files as possible, taking size and selector limits into account",
+    "name": "gulp-concat-limit",
+    "version": "0.0.3",
+    "homepage": "http://github.com/adam-lynch/gulp-concat-limit",
+    "description": "Concatenates files into as few files as possible without exceeding a given length limit",
     "main": "./index.js",
     "dependencies": {
-        "gonzales": "*",
-        "through": "~2.3.4",
-        "vinyl": "*"
+        "gulp-util": "*",
+        "through": "~2.3.4"
     },
     "devDependencies": {
         "mocha": "*",
@@ -18,7 +17,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "git://github.com/adam-lynch/combine-css.git"
+        "url": "git://github.com/adam-lynch/gulp-concat-limit.git"
     },
     "keywords": [
         "gulpplugin",
@@ -28,7 +27,7 @@
     "author": "Adam Lynch <adam@teamwork.com>",
     "license": "MIT",
     "bugs": {
-        "url": "http://github.com/adam-lynch/combine-css/issues"
+        "url": "http://github.com/adam-lynch/gulp-concat-limit/issues"
     },
     "engines": {
         "node": ">=0.8"

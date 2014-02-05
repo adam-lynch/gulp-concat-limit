@@ -1,14 +1,14 @@
-# combine-css v0.0.2 [![Build Status](https://travis-ci.org/adam-lynch/combine-css.png)](https://travis-ci.org/adam-lynch/combine-css)
+# gulp-concat-limit v0.0.2 [![Build Status](https://travis-ci.org/adam-lynch/gulp-concat-limit.png)](https://travis-ci.org/adam-lynch/gulp-concat-limit)
 
 ## Information
 
 <table>
 <tr> 
-<td>Package</td><td>combine-css</td>
+<td>Package</td><td>gulp-concat-limit</td>
 </tr>
 <tr>
 <td>Description</td>
-<td>Combines CSS files into as few files as possible, taking size and selector limits into account</td>
+<td>Concatenates files into as few files as possible without exceeding a given length limit</td>
 </tr>
 <tr>
 <td>Node Version</td>
@@ -16,26 +16,33 @@
 </tr>
 </table>
 
+## Install
+```js
+npm install gulp-concat-limit
+```
+
 ## Example usage with [Gulp](http://github.com/gulpjs/gulp)
 
 ```js
 var gulp = require('gulp');
-var combineCSS = require('combine-css');
+var concat = require('gulp-concat-limit');
 
-gulp.task('combine', function() {
+gulp.task('concat', function() {
     gulp.src('./css/*.css')
-        .pipe(combineCSS({
-            lengthLimit: 256,//2KB
-            prefix: '_m-',
-            selectorLimit: 4080
-        }))
+        .pipe(concat('style-', 256))//2KB
         .pipe(gulp.dest('./combinedCSS'));
 });
 
-gulp.task('default', ['combine']);
+gulp.task('default', ['concat']);
 
 // Rerun the task when a file changes
 gulp.task('watch', function () {
-  gulp.watch('./css/*.css', ['combine']);
+  gulp.watch('./css/*.css', ['concat']);
 });
 ```
+
+## Parameters
+
+**fileName** (required) string
+**sizeLimit** (optional) number, defaults to 25600 (200KB)
+**options** (optional); options.newLine (optional) boolean, defaults to false

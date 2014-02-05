@@ -1,56 +1,52 @@
-var combineCSS = require('../');
+var concat = require('../');
 var should = require('should');
 var os = require('os');
 var fs = require('fs');
 var path = require('path');
-var File = require('vinyl');
+var File = require('gulp-util').File;
 var Buffer = require('buffer').Buffer;
 require('mocha');
 
-describe('gulp-combine-css', function() {
-    describe('combineCSS()', function() {
+describe('gulp-concat-limit', function() {
+    describe('concat()', function() {
         var testDirectory = './test',
-            testCSS = testDirectory + '/css',
-            expectedCSS = testDirectory + '/expectedCSS';
+            assets = testDirectory + '/assets',
+            expectedAssets = testDirectory + '/expectedAssets';
 
-        it('should combine files under the size and selector limits', function(done) {
-            var stream = combineCSS({
-                    lengthLimit: 99999999999,
-                    prefix: 'test1-',
-                    selectorLimit: 99999999999
-                });
+        it('should combine files under the length limit', function(done) {
+            var stream = concat('testA.js', 99999999999);
 
-            fs.readFile(testCSS + '/a.css', 'utf8', function(err, data){
+            fs.readFile(assets + '/a.js', 'utf8', function(err, data){
                 if (err) {
                     throw new Error(err);
                 }
 
                 var stylesheetA = new File({
-                    path: testCSS + '/a.css',
+                    path: assets + '/a.js',
                     contents: new Buffer(data)
                 });
 
-                fs.readFile(testCSS + '/b.css', 'utf8', function(err, data){
+                fs.readFile(assets + '/b.js', 'utf8', function(err, data){
                     if (err) {
                         throw new Error(err);
                     }
 
                     var stylesheetB = new File({
-                        path: testCSS + '/b.css',
+                        path: assets + '/b.js',
                         contents: new Buffer(data)
                     });
 
-                    fs.readFile(testCSS + '/c.css', 'utf8', function(err, data){
+                    fs.readFile(assets + '/c.js', 'utf8', function(err, data){
                         if (err) {
                             throw new Error(err);
                         }
 
                         var stylesheetC = new File({
-                            path: testCSS + '/c.css',
+                            path: assets + '/c.js',
                             contents: new Buffer(data)
                         });
 
-                        fs.readFile(expectedCSS + '/abc-0.css', 'utf8', function(err, expectedCSSContents){
+                        fs.readFile(expectedAssets + '/abc0.js', 'utf8', function(err, expectedCSSContents){
                             if (err) {
                                 throw new Error(err);
                             }
@@ -61,7 +57,7 @@ describe('gulp-combine-css', function() {
                                 should.exist(newFile.relative);
                                 should.exist(newFile.contents);
 
-                                newFile.relative.should.equal("test1-0.css");
+                                newFile.relative.should.equal("testA0.js");
                                 String(newFile.contents).should.equal(expectedCSSContents);
                                 Buffer.isBuffer(newFile.contents).should.equal(true);
                                 done();
@@ -77,52 +73,48 @@ describe('gulp-combine-css', function() {
             });
         });
 
-        it('should not combine files if the combination would exceed the size limit', function(done) {
-            var prefix = 'tooLarge-',
-                stream = combineCSS({
-                    lengthLimit: 200,
-                    prefix: prefix,
-                    selectorLimit: 99999999999
-                });
+        it('should not combine files if the combination would exceed the length limit', function(done) {
+            var prefix = 'tooLarge',
+                stream = concat(prefix + '.css', 200);
 
-            fs.readFile(testCSS + '/a.css', 'utf8', function(err, data){
+            fs.readFile(assets + '/a.css', 'utf8', function(err, data){
                 if (err) {
                     throw new Error(err);
                 }
 
                 var stylesheetA = new File({
-                    path: testCSS + '/a.css',
+                    path: assets + '/a.css',
                     contents: new Buffer(data)
                 });
 
-                fs.readFile(testCSS + '/b.css', 'utf8', function(err, data){
+                fs.readFile(assets + '/b.css', 'utf8', function(err, data){
                     if (err) {
                         throw new Error(err);
                     }
 
                     var stylesheetB = new File({
-                        path: testCSS + '/b.css',
+                        path: assets + '/b.css',
                         contents: new Buffer(data)
                     });
 
-                    fs.readFile(testCSS + '/c.css', 'utf8', function(err, data){
+                    fs.readFile(assets + '/c.css', 'utf8', function(err, data){
                         if (err) {
                             throw new Error(err);
                         }
 
                         var stylesheetC = new File({
-                            path: testCSS + '/c.css',
+                            path: assets + '/c.css',
                             contents: new Buffer(data)
                         });
 
-                        fs.readFile(expectedCSS + '/' + prefix + '0.css', 'utf8', function(err, data){
+                        fs.readFile(expectedAssets + '/' + prefix + '0.css', 'utf8', function(err, data){
                             if (err) {
                                 throw new Error(err);
                             }
 
                             var expectedCSSContents = [data];
 
-                            fs.readFile(expectedCSS + '/' + prefix + '1.css', 'utf8', function(err, data){
+                            fs.readFile(expectedAssets + '/' + prefix + '1.css', 'utf8', function(err, data){
                                 if (err) {
                                     throw new Error(err);
                                 }
@@ -157,80 +149,62 @@ describe('gulp-combine-css', function() {
             });
         });
 
-        it('should not combine files if the combination would exceed the selector count limit', function(done) {
-            var prefix = 'tooManySelectors-',
-                stream = combineCSS({
-                    lengthLimit: 99999999999,
-                    prefix: prefix,
-                    selectorLimit: 5
-                });
+        it('should interleave line breaks when told', function(done) {
+            var stream = concat('abcLineBreaks.css', 99999999999, {
+                newLine: true
+            });
 
-            fs.readFile(testCSS + '/a.css', 'utf8', function(err, data){
+            fs.readFile(assets + '/a.css', 'utf8', function(err, data){
                 if (err) {
                     throw new Error(err);
                 }
 
                 var stylesheetA = new File({
-                    path: testCSS + '/a.css',
+                    path: assets + '/a.css',
                     contents: new Buffer(data)
                 });
 
-                fs.readFile(testCSS + '/b.css', 'utf8', function(err, data){
+                fs.readFile(assets + '/b.css', 'utf8', function(err, data){
                     if (err) {
                         throw new Error(err);
                     }
 
                     var stylesheetB = new File({
-                        path: testCSS + '/b.css',
+                        path: assets + '/b.css',
                         contents: new Buffer(data)
                     });
 
-                    fs.readFile(testCSS + '/c.css', 'utf8', function(err, data){
+                    fs.readFile(assets + '/c.css', 'utf8', function(err, data){
                         if (err) {
                             throw new Error(err);
                         }
 
                         var stylesheetC = new File({
-                            path: testCSS + '/c.css',
+                            path: assets + '/c.css',
                             contents: new Buffer(data)
                         });
 
-                        fs.readFile(expectedCSS + '/' + prefix + '0.css', 'utf8', function(err, data){
+                        fs.readFile(expectedAssets + '/abcLineBreaks0.css', 'utf8', function(err, expectedCSSContents){
                             if (err) {
                                 throw new Error(err);
                             }
 
-                            var expectedCSSContents = [data];
+                            stream.on('data', function(newFile){
+                                should.exist(newFile);
+                                should.exist(newFile.path);
+                                should.exist(newFile.relative);
+                                should.exist(newFile.contents);
 
-                            fs.readFile(expectedCSS + '/' + prefix + '1.css', 'utf8', function(err, data){
-                                if (err) {
-                                    throw new Error(err);
-                                }
-
-                                expectedCSSContents.push(data);
-                                var iteration = 0;
-
-                                stream.on('data', function(newFile){
-                                    should.exist(newFile);
-                                    should.exist(newFile.path);
-                                    should.exist(newFile.relative);
-                                    should.exist(newFile.contents);
-
-                                    newFile.relative.should.equal(prefix + iteration + '.css');
-                                    String(newFile.contents).should.equal(expectedCSSContents[iteration]);
-                                    Buffer.isBuffer(newFile.contents).should.equal(true);
-
-                                    iteration++;
-                                    if(iteration === expectedCSSContents.length){
-                                        done();
-                                    }
-                                });
-
-                                stream.write(stylesheetA);
-                                stream.write(stylesheetB);
-                                stream.write(stylesheetC);
-                                stream.end();
+                                newFile.relative.should.equal("abcLineBreaks0.css");
+                                String(newFile.contents).should.equal(expectedCSSContents);
+                                Buffer.isBuffer(newFile.contents).should.equal(true);
+                                done();
                             });
+
+                            stream.write(stylesheetA);
+                            stream.write(stylesheetB);
+                            stream.write(stylesheetC);
+                            stream.end();
                         });
                     });
                 });
