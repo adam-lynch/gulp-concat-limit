@@ -21,8 +21,8 @@
     },
     "keywords": [
         "gulpplugin",
-        "css",
-        "combine"
+        "concat",
+        "limit"
     ],
     "author": "Adam Lynch <adam@teamwork.com>",
     "license": "MIT",
