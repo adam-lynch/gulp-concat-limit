@@ -1,4 +1,4 @@
-# gulp-concat-limit v0.0.2 [![Build Status](https://travis-ci.org/adam-lynch/gulp-concat-limit.png)](https://travis-ci.org/adam-lynch/gulp-concat-limit)
+# gulp-concat-limit v0.0.3 [![Build Status](https://travis-ci.org/adam-lynch/gulp-concat-limit.png)](https://travis-ci.org/adam-lynch/gulp-concat-limit)
 
 ## Information
 
