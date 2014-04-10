@@ -29,7 +29,7 @@ var concat = require('gulp-concat-limit');
 
 gulp.task('concat', function() {
     gulp.src('./css/*.css')
-        .pipe(concat('style-', 256))//2KB
+        .pipe(concat('style-.css', 256))//2KB
         .pipe(gulp.dest('./combinedCSS'));
 });
 
